@@ -3,3 +3,11 @@
 Homestead.json
 Homestead.yaml
 .env
+public/images
+public/pages/about
+public/pages/categories
+public/pages/tags
+public/posts/_discarded
+public/posts/_drafts
+public/posts/_posts
+public/posts/_trash

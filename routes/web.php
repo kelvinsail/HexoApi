@@ -14,3 +14,7 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->get('dirList', 'DataController@getDirList');
+$router->get('fileContent', 'DataController@getFileContent');
