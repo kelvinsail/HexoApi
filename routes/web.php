@@ -15,6 +15,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('/auth/login', 'AuthController@postLogin');
+$router->post('/auth/register', 'AuthController@register');
 
-$router->get('dirList', 'DataController@getDirList');
-$router->get('fileContent', 'DataController@getFileContent');
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->get('dirList', 'DataController@getDirList');
+    $router->get('fileContent', 'DataController@getFileContent');
+});

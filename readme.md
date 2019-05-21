@@ -19,4 +19,11 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# HexoApi
+
+
+# HexoApi 部署配置清单
+## PHP Functions Require
+- exec()
+- shell_exec()
+## Env Configure
+- SOURCE_PATH

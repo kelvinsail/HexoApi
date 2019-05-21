@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 
+/**
+ * 数据获取相关路由
+ *
+ * Class DataController
+ * @package App\Http\Controllers
+ */
 class DataController extends Controller
 {
     protected $post_list = array("_discarded", "_drafts", "_posts", "_trash");
