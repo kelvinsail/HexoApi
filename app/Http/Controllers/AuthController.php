@@ -19,17 +19,34 @@ class AuthController extends Controller
         $this->jwt = $jwt;
     }
 
-    public function postLogin(Request $request)
+    /**
+     * 登录
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(Request $request)
     {
         if (!$token = $this->jwt->attempt($request->only('email', 'password'))) {
-            return response()->json(['code' => 201, 'data' => [], 'msg' => 'user_not_found']);
+            return response()->json(['code' => 201, 'data' => [], 'msg' => '邮箱或密码错误']);
         }
 
-        return response()->json(compact('token'));
+        return response()->json(['code' => 200, 'data' => ['token' => $token], 'msg' => 'success']);
     }
 
+    /**
+     * 注册
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request)
     {
+        //判断是否允许多人注册
+        if (!env('ALLOW_REGISTER') && User::query()->count() > 0) {
+            return response()->json(['code' => 500, 'data' => [], 'msg' => '未开放注册']);
+        }
+        //验证参数
         $validator = $this->paramsValidator($request,
             array(
                 'name' => 'required',
@@ -39,6 +56,8 @@ class AuthController extends Controller
         if ($validator) {
             return response()->json(['code' => 400, 'data' => $validator, 'msg' => 'fail']);
         }
+
+        //保存账号信息
         $user = new User();
         $user->name = $request->input('name');
         $user->password = Hash::make($request->input('password'));
