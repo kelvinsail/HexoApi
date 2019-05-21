@@ -18,7 +18,9 @@ $router->get('/', function () use ($router) {
 $router->post('/auth/login', 'AuthController@postLogin');
 $router->post('/auth/register', 'AuthController@register');
 
-$router->group(['middleware' => 'auth'], function () use ($router) {
+$router->group(['middleware' => 'auth:api'], function($router){
     $router->get('dirList', 'DataController@getDirList');
     $router->get('fileContent', 'DataController@getFileContent');
 });
+
+
